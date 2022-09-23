@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}  Post Detail {% endblock %}
+
+{% block content %}  
+
+
+<h1>{{ post.title }} </h1>
+<p> {{post.content}}</p>
+
+<blockquote>By {{post.user.get_full_name()}} </blockquote>
+
+{% if post.tags %}
+<p>
+    <b>Tags:</b>
+    {% for tag in post.tags %}
+    <a href="/tags/{{ tag.id }}"><i >{{ tag.name }}</i></a>
+    {% endfor %}
+</p>
+
+{% endif %}
+
+
+<a href="/posts/{{post.id}}/edit">
+    <button>Edit</button>
+</a>
+
+<form action="/posts/{{post.id}}/delete" method="post">
+    <button>Delete</button>
+</form>
+
+<a href="/users/{{post.user.id}}">Go back</a>
+
+{% endblock %}
